@@ -4,7 +4,7 @@ const routes = require('./routes')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const url = `mongodb://localhost/phase2weekend1`
-const port = 3000
+const port = process.env.PORT || 3000
 
 // mongoose.set('useNewUrlParser', true);
 mongoose.set('useCreateIndex', true);
