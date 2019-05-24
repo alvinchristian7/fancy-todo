@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Todo asuuuiiiikkk</title>
+  <link rel="shortcut icon"
+    href="https://www.gannett-cdn.com/presto/2018/10/19/PBRE/d25f200a-77c7-444b-aa43-30ef0e8158e5-Books.jpg?crop=2459,1386,x0,y272&width=3200&height=1680&fit=bounds"
+    type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-signin-client_id"
+    content="396392411826-p13rav5fuhqi2h66cqnh66ocha9eqj99.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+</head>
+
+<body>
+  <!-- START ON REGISTER SECTION FORM -->
+  <div class="container">
+    <h6 id="message"></h6>
+    <!-- <h6 id="messageError"></h6> -->
+    <div id="login-register-form" class="container mt-4">
+      <ul class="nav nav-pills mb-3" id="login-register-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="login-tab" data-toggle="pill" href="#pills-login" role="tab"
+            aria-controls="pills-login" aria-selected="true">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="register-tab" data-toggle="pill" href="#pills-register" role="tab"
+            aria-controls="pills-register" aria-selected="false">Register</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <form class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="pills-login-tab"
+          method="POST">
+          <div class="form-group">
+            <label for="Email">Email address</label>
+            <input type="email" class="form-control" id="emaillogin" aria-describedby="emailHelp"
+              placeholder="Enter email" required>
+          </div>
+          <div class="form-group">
+            <label for="Password">Password</label>
+            <input type="password" class="form-control" id="passwordlogin" placeholder="Password" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+          <br>
+          <div class="mt-4">
+            <h3>OR</h3>
+            <h5>Sign in with Google :</h5>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+            <br>
+          </div>
+        </form>
+        <form class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="pills-register-tab"
+          method="POST">
+          <div class="form-group">
+            <label for="Username">Name</label>
+            <input type="text" class="form-control" id="nameregister" placeholder="Enter username">
+          </div>
+          <div class="form-group">
+            <label for="Email">Email Address</label>
+            <input type="email" class="form-control" id="emailregister" aria-describedby="emailHelp"
+              placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="Password">Password</label>
+            <input type="password" class="form-control" id="passwordregister" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+      </div>
+    </div>
+    <div id="TodoLists" class="row mt-4">
+      <div class="row mb-3">
+        <ol class="nav mr-auto">
+          <li class='nav-item'>
+            <a id="createNewTodo" class="nav-link btn btn-primary" href="">Create New Todo</a>
+          </li>
+        </ol>
+        <h3 id="namaUser" class="nav text-center">
+  
+        </h3>
+        <ol class="nav ml-auto">
+          <li class='nav-item'>
+            <a onclick="logout()" id="logout" class="nav-link btn btn-secondary" href="">Logout</a>
+          </li>
+        </ol>
+      </div>
+      <div class="row justify-content-between">
+        <div class="col-2">
+          <h3>Category</h3>
+          <select id="filterByStatus" class="form-control">
+            <option value="all status"> All Status</option>
+            <option value="unfinished">Unfinished</option>
+            <option value="finished">Finished</option>
+          </select>
+        </div>
+        <div class="col-5">
+          <!-- <form method="GET" id="searchForm">
+            <input id="searchBox" type="text" placeholder="Search.." name="search">
+            <input id="searchButton" type="submit" value="Cari"></input>
+          </form> -->
+          <div id="results">
+            
+          </div>
+        </div>
+        <div id="selectedTodo" class="col-4">
+          <form id="editTodoForm">
+            <div class="form-group">
+              <label for="selectedTitle">Title</label>
+              <input id='selectedTitle' class="form-control" type="text">
+            </div>
+            <div class="form-group">
+              <label for="selectedDescription">Description</label>
+              <textarea id='selectedDescription' class="form-control">
+              </textarea>
+            </div>
+            <div class="form-group">
+              <label for="selectedStatus">Status</label>
+              <select id="selectedStatus" class="form-control">
+                  <option value="unfinished" selected>Unfinished</option>
+                  <option value="finished">Finished</option>
+                </select>
+            </div>
+            <div class="form-group">
+              <label for="selectedDueDate">Due Date</label>
+              <input id='selectedDueDate' class="form-control" type="date">
+            </div>
+            <input type="submit" class="btn btn-primary" value="Update">
+          </form>
+        </div>
+      </div>
+    </div>
+    <div id="createTodo" class="container mt-4">
+      <h1>Create New Todo</h1>
+      <form method="POST" id="createTodoForm" class="form-group">
+        <div class="my-4">
+          <label for="newTitle">Title</label>
+          <input id="newTitle" type="text" class="form-control" placeholder="title of todo">
+        </div>
+        <div class="my-4">
+          <label for="newDesc">Description</label>
+          <textarea id="newDesc" class="form-control" placeholder="desc of todo">
+          </textarea>
+        </div>
+        <div class="my-4">
+          <label for="newDuedate">Due Date</label>
+          <input id="newDuedate" class="form-control" type="date">
+        </div>
+        <input type="submit" class="btn btn-success" value="Add Now">
+        <input id="cancel" type="button" class="btn btn-secondary" value="Cancel">
+      </form>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script> -->
+  <script src="main.js"></script>
+</body>
+
+</html>
