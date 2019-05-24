@@ -67,27 +67,7 @@ class UserController {
         password: req.body.password
       })
       .then(user => {
-        console.log(user)
-        return User.findOne({ email: req.body.email })
-      })
-      .then(user => {
-        if (user) {
-          let { name } = user
-          let payload = {
-            _id: user._id,
-            name: user.name,
-            email: user.email
-          }
-          let token = jwt.sign(payload, process.env.KUNCI)
-          console.log('token register -->', token)
-          res.status(200).json({
-            token, name
-          })
-        } else {
-          res.status(404).json({
-            message: "User Not Found"
-          })
-        }
+        res.status(201).json(user)
       })
       .catch(err => {
         if(err.message) {  

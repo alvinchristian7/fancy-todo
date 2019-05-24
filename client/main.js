@@ -54,12 +54,8 @@ function register() {
     }
   })
     .done((data) => {
-      localStorage.setItem('token', data.token)
-      showSuccessMessage(`Hai ${data.name}, kamu berhasil login`)
+      showSuccessMessage(`Hai ${data.name}, kamu berhasil register, silahkan login dahulu`)
       console.log("success register", data)
-      getAllTodos()
-      $("#TodoLists").show()
-      $("#login-register-form").hide()
     })
     .fail((err) => {
       console.log(err)

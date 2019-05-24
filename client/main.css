@@ -2,6 +2,7 @@
   color:rgb(0, 75, 187);
   position: absolute;
   left:50%;
+  transform: translateX(-50%);
 }
 
 #createTodo, #editTodoForm, #TodoLists, #login-register-form {
